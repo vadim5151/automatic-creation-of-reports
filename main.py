@@ -65,14 +65,6 @@ def get_rid_of_unnecessary_sections_bottom(all_tags):
             del reversed_all_tags[0:index]
             return list(reversed(reversed_all_tags))
 
-def get_rid_of_unnecessary_sections_from_above(all_tags):
-    copy_all_tags = copy(all_tags)
-    for i in copy_all_tags:
-        if'<p>' in str(i):
-            index = copy_all_tags.index(i)
-            del copy_all_tags[0:index-3]
-            return copy_all_tags
-
 def get_tags_without_notes(all_tags):
         return [re.sub(r"\[.*?\]",r"", str(tag)) for tag in all_tags]
 
@@ -103,8 +95,11 @@ if __name__ == '__main__':
     
     
     all_tags = main_block.find_all(['p', 'h1', 'h2', 'h3', 'h4','a'])
-
+    h1 =  soup.find('h1', class_="firstHeading mw-first-heading").text
+    
     styles = setting_styles(doc)
+    head = doc.add_heading(h1,level =1)
+    head.alignment = WD_ALIGN_PARAGRAPH.CENTER
     all_tags = get_rid_of_unnecessary_sections_bottom(all_tags)
     # all_tags = get_rid_of_unnecessary_sections_from_above(all_tags)
     all_tags = get_tags_without_notes(all_tags)
