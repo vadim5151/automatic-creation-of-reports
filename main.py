@@ -101,7 +101,7 @@ if __name__ == '__main__':
     head = doc.add_heading(h1,level =1)
     head.alignment = WD_ALIGN_PARAGRAPH.CENTER
     all_tags = get_rid_of_unnecessary_sections_bottom(all_tags)
-    # all_tags = get_rid_of_unnecessary_sections_from_above(all_tags)
+
     all_tags = get_tags_without_notes(all_tags)
     fill_in_file(all_tags,doc)
     file_name = input('Выберите имя файла: ')
